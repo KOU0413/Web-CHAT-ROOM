@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEB CHAT</title>
+    <style>
+        body {
+            background-color: black;
+            font-family: "Courier New", monospace;
+        }
+
+        h1 {
+            color: lime;
+            text-align: center;
+        }
+
+        input {
+            display: block;
+            margin: 0 auto;
+            color: lime;
+            background-color: black;
+            border: 1px solid lime;
+            width: 300px;
+            height: 40px;
+        }
+
+        .danmu {
+            position: absolute;
+            color: lime;
+            white-space: nowrap;
+            right: 100%;
+            left: auto;
+            animation: bounce linear infinite;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>WEB CHAT</h1>
+    <input id="inputText" type="text" placeholder="What you wanna say?" />
+    <script>
+        const inputText = document.getElementById("inputText");
+
+        function createDanmu(text) {
+            const danmu = document.createElement("div");
+            danmu.classList.add("danmu");
+            danmu.innerText = text;
+            danmu.style.top = `${Math.random() * 80}%`;
+            danmu.style.right = "0";
+            document.body.appendChild(danmu);
+
+            const duration = 4 + Math.random() * 4;
+            danmu.style.transition = `all ${duration}s linear`;
+            danmu.style.transition = `transform ${duration}s linear`;
+            setTimeout(() => {
+                danmu.style.transform = `translateX(-100vw)`;
+            }, 100);
+            
+
+
+        }
+
+        inputText.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" && inputText.value.trim() !== "") {
+                createDanmu(inputText.value);
+                inputText.value = "";
+            }
+        });
+    </script>
+</body>
+
+</html>
